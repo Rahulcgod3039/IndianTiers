@@ -107,7 +107,7 @@
 </head>
 <body>
 
-<div class="header-title">Rahul <span>Kingdom of Web</span></div>
+<div class="header-title">Indian <span>TierList</span></div>
 
 <div class="navbar" id="mode-nav">
     <div class="nav-item active" onclick="setMode('Overall')">🏆 Overall</div>
@@ -259,7 +259,7 @@ function renderGrid(data) {
 }
 
 window.addPlayer = async () => {
-    if(prompt("Admin Key:") !== "RAHUL121") return alert("Access Denied");
+    if(prompt("Admin Key:") !== "RAHULCOMBATGRANDMASTER") return alert("Access Denied");
     const name = prompt("Minecraft IGN:");
     if(!name) return;
     const region = prompt("Region:", "NA").toUpperCase();
@@ -272,7 +272,7 @@ window.addPlayer = async () => {
 }
 
 window.removePlayer = async () => {
-    if(prompt("Admin Key:") !== "RAHUL121") return;
+    if(prompt("Admin Key:") !== "RAHULCOMBATGRANDMASTER") return;
     const name = prompt("IGN to delete:");
     if(name) {
         await deleteDoc(doc(db, "players", name.toLowerCase()));
@@ -283,5 +283,4 @@ window.removePlayer = async () => {
 loadData();
 </script>
 </body>
-
 </html>
