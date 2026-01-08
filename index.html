@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>IndianTiers</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -19,98 +19,93 @@
         body { font-family: 'Inter', sans-serif; background: var(--bg-body); color: white; margin: 0; padding-bottom: 50px; overflow-x: hidden; }
 
         /* HEADER */
-        .header-title { text-align: left; padding: 25px 40px; font-size: 26px; font-weight: 800; color: #fff; letter-spacing: -1px; }
-        .header-title span { color: var(--accent); }
+        .header-top { padding: 15px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        .nav-logo img { height: 75px; width: auto; max-width: 100%; border-radius: 8px; }
 
-        /* NAVIGATION BAR */
-        .navbar { background: var(--bg-nav); padding: 5px 20px; display: flex; justify-content: flex-start; gap: 5px; border-bottom: 1px solid var(--border); overflow-x: auto; position: sticky; top: 0; z-index: 100; }
+        .quick-links { display: flex; gap: 8px; width: 100%; max-width: 480px; justify-content: center; }
+        .link-btn { 
+            background: #1c2230; border: 1px solid var(--border); color: white; padding: 10px; 
+            border-radius: 8px; text-decoration: none; font-size: 11px; font-weight: 700; flex: 1; 
+            display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer;
+        }
+        .link-btn img { width: 14px; height: 14px; display: block; }
+
+        /* NAVBAR */
+        .navbar { 
+            background: var(--bg-nav); display: flex; gap: 5px; border-bottom: 1px solid var(--border); 
+            overflow-x: auto; position: sticky; top: 0; z-index: 100; padding: 0 10px;
+            scrollbar-width: none; -webkit-overflow-scrolling: touch;
+        }
+        .navbar::-webkit-scrollbar { display: none; }
         .nav-item { 
-            padding: 12px 20px; border-radius: 10px 10px 0 0; cursor: pointer; color: var(--text-dim); 
-            font-weight: 700; transition: 0.2s; display: flex; align-items: center; gap: 10px; font-size: 14px;
-            border-bottom: 3px solid transparent; white-space: nowrap;
+            padding: 15px 18px; cursor: pointer; color: var(--text-dim); font-weight: 700; 
+            display: flex; align-items: center; gap: 8px; font-size: 13px; white-space: nowrap;
+            border-bottom: 3px solid transparent;
         }
-        .nav-item img { width: 22px; height: 22px; filter: grayscale(1); opacity: 0.5; }
-        .nav-item:hover { color: white; background: #1e2533; }
-        .nav-item.active { color: white; border-bottom-color: white; background: #1c2230; }
-        .nav-item.active img { filter: grayscale(0); opacity: 1; }
+        .nav-item.active { color: white; border-bottom-color: #ffb400; background: #302E01; }
+        .nav-item img { width: 18px; height: 18px; }
 
-        /* SEARCH & CONTROLS */
-        .top-controls { max-width: 1200px; margin: 20px auto; display: flex; justify-content: flex-end; padding: 0 20px; }
-        .search-box { background: var(--bg-card); border: 1px solid var(--border); padding: 10px 15px; border-radius: 8px; color: white; width: 250px; outline: none; font-size: 14px; transition: 0.2s; }
-        .search-box:focus { border-color: var(--accent); box-shadow: 0 0 10px rgba(255,180,0,0.1); }
-
-        /* ANIMATIONS */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes crownGlow {
-            0%, 100% { box-shadow: 0 0 5px rgba(255, 180, 0, 0.1); }
-            50% { box-shadow: 0 0 20px rgba(255, 180, 0, 0.3); }
+        /* SEARCH */
+        .top-controls { padding: 15px; display: flex; justify-content: center; }
+        .search-box { 
+            background: var(--bg-card); border: 1px solid var(--border); padding: 14px; 
+            border-radius: 10px; color: white; width: 100%; max-width: 500px; outline: none; font-size: 14px;
         }
 
-        /* LIST CONTAINER */
-        .list-container { max-width: 1100px; margin: 0 auto; display: none; flex-direction: column; gap: 10px; padding: 0 20px; }
-        .player-row { 
-            background: var(--bg-card); border-radius: 12px; padding: 15px 25px; display: flex; align-items: center; 
-            border: 1px solid var(--border); transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;
-            animation: fadeInUp 0.4s ease forwards; opacity: 0;
+        /* REGION BOX STYLE */
+        .region-tag {
+            background: rgba(255, 173, 252, 0.1);
+            color: #FFADFC;
+            border: 1px solid rgba(255, 173, 252, 0.4);
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 800;
+            text-align: center;
+            min-width: 20px;
+            display: inline-block;
         }
+
+        /* LIST & ROW */
+        .list-container { max-width: 1100px; margin: 0 auto; display: none; flex-direction: column; gap: 10px; padding: 0 15px; }
+        .player-row { background: var(--bg-card); border-radius: 12px; padding: 15px; display: flex; align-items: center; border: 1px solid var(--border); transition: 0.2s; cursor: pointer; }
+        .rank-num { font-size: 22px; font-weight: 800; width: 35px; color: #4b5563; font-style: italic; }
+        .player-img { width: 50px; height: 50px; border-radius: 8px; margin-right: 15px; }
+        .player-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+        .name-tag-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
         
-        /* RANK SPECIFIC STYLES */
-        .player-row.rank-1 { background: linear-gradient(90deg, #1e1b10, #161b26); border-color: #ffb40066; animation: fadeInUp 0.4s ease forwards, crownGlow 3s infinite; }
-        .player-row:hover { transform: translateX(8px); border-color: #555; background: #1e2433; }
-        
-        .rank-num { font-size: 26px; font-weight: 800; width: 50px; font-style: italic; color: #4b5563; }
-        .rank-1 .rank-num { color: var(--tier1); }
-        .rank-2 .rank-num { color: var(--tier2); }
-        .rank-3 .rank-num { color: var(--tier3); }
-
-        .player-img { width: 52px; height: 52px; border-radius: 8px; margin-right: 20px; border: 2px solid var(--border); }
-        .player-main { flex-grow: 1; }
-        .player-name { font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-        
-        /* TITLE TAGS */
-        .title-tag { font-size: 10px; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; font-weight: 900; }
+        .title-tag { font-size: 10px; font-weight: 900; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; }
         .tag-grand { background: var(--accent); color: black; }
         .tag-master { background: #e2e8f0; color: black; }
-        .tag-ace { background: #ff7e5f; color: white; }
-        .tag-spec { border: 1px solid #4ade80; color: #4ade80; }
+        .stats-btn-text { color: var(--accent); font-weight: 800; font-size: 11px; white-space: nowrap; margin-left: 10px; }
 
-        .player-pts { font-size: 12px; color: var(--text-dim); font-weight: 600; }
-        .region-badge { background: #1e2433; color: #94a3b8; padding: 5px 10px; border-radius: 5px; font-weight: 800; font-size: 12px; margin: 0 30px; border: 1px solid var(--border); }
-        
-        .mini-tier-box { display: flex; gap: 12px; align-items: center; }
-        .mini-item { display: flex; flex-direction: column; align-items: center; gap: 3px; width: 45px; }
-        .mini-icon { width: 16px; height: 16px; }
-        .mini-val { font-size: 11px; font-weight: 800; color: var(--accent); }
+        /* MODAL */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); justify-content: center; align-items: center; padding: 15px; }
+        .modal-content { background: var(--bg-nav); padding: 25px; border-radius: 20px; border: 1px solid var(--accent); width: 100%; max-width: 400px; text-align: center; position: relative; }
+        .modal-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+        .stat-item { background: var(--bg-card); padding: 10px; border-radius: 10px; border: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+        .is-unranked { filter: grayscale(1); opacity: 0.4; }
 
-        /* GRID VIEW */
-        .grid-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; padding: 20px; }
-        .tier-column { background: #12151f; border-radius: 12px; border: 1px solid var(--border); overflow: hidden; min-height: 300px; }
-        .tier-header { text-align: center; padding: 18px; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; border-bottom: 2px solid transparent; }
-        .t1-h { background: rgba(255, 180, 0, 0.1); color: var(--tier1); border-bottom-color: var(--tier1); }
-        .t2-h { background: rgba(148, 163, 184, 0.1); color: var(--tier2); border-bottom-color: var(--tier2); }
-        .t3-h { background: rgba(205, 127, 50, 0.1); color: var(--tier3); border-bottom-color: var(--tier3); }
-        .t4-h { background: rgba(74, 222, 128, 0.1); color: var(--tier4); border-bottom-color: var(--tier4); }
-        .t5-h { background: rgba(59, 130, 246, 0.1); color: var(--tier5); border-bottom-color: var(--tier5); }
-
-        .grid-player { display: flex; align-items: center; padding: 12px 15px; border-bottom: 1px solid #1e2433; gap: 12px; transition: 0.2s; }
-        .grid-player:hover { background: #1c2230; padding-left: 20px; }
-        .grid-player img { width: 32px; height: 32px; border-radius: 4px; }
-        .grid-player span { font-weight: 600; font-size: 14px; color: #e2e8f0; }
-
-        .admin-bar { text-align: center; margin-top: 60px; padding: 30px; border-top: 1px solid var(--border); }
-        .admin-btn { background: #1c2230; border: 1px solid var(--border); color: var(--text-dim); padding: 10px 25px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.2s; margin: 5px; }
-        .admin-btn:hover { background: #232a3b; color: white; border-color: #444; }
+        /* ADMIN BAR */
+        #adminPanel { display: none; padding: 30px 15px; flex-direction: column; gap: 12px; max-width: 500px; margin: 0 auto; }
+        .admin-btn { width: 100%; background: #1c2230; border: 1px solid var(--border); color: white; padding: 16px; border-radius: 10px; font-weight: 700; cursor: pointer; }
     </style>
 </head>
 <body>
 
-<div class="header-title">Indian <span>TierList</span></div>
+<div class="header-top">
+    <div class="nav-logo">
+        <img src="https://cdn.discordapp.com/attachments/1455267729614573795/1458775180477333545/1767869439071.png?ex=6960ddc1&is=695f8c41&hm=cc53b721a8bd778be6ecc976e18a5214f75801e815a854125f4f50abaa0e9411&" alt="logo">
+    </div>
+    <div class="quick-links">
+        <div class="link-btn" onclick="setMode('Overall')"><img src="https://www.centraltierlist.com/icons/trophy.svg"> Ranking</div>
+        <a href="#" class="link-btn"><img src="https://www.svgrepo.com/show/353655/discord-icon.svg"> Discord</a>
+        <div class="link-btn" onclick="unlockAdmin()"><img src="https://cdn-icons-png.flaticon.com/512/2206/2206368.png"> Admin Only</div>
+    </div>
+</div>
 
 <div class="navbar" id="mode-nav">
-    <div class="nav-item active" onclick="setMode('Overall')">🏆 Overall</div>
+    <div class="nav-item active" onclick="setMode('Overall')"><img src="https://www.centraltierlist.com/icons/trophy.svg"> Overall</div>
     <div class="nav-item" onclick="setMode('Vanilla')"><img src="https://mctiers.com/tier_icons/vanilla.svg"> Vanilla</div>
     <div class="nav-item" onclick="setMode('Pot')"><img src="https://mctiers.com/tier_icons/pot.svg"> Pot</div>
     <div class="nav-item" onclick="setMode('NethPot')"><img src="https://mctiers.com/tier_icons/nethop.svg"> NethPot</div>
@@ -119,18 +114,31 @@
     <div class="nav-item" onclick="setMode('Sword')"><img src="https://mctiers.com/tier_icons/sword.svg"> Sword</div>
     <div class="nav-item" onclick="setMode('Axe')"><img src="https://mctiers.com/tier_icons/axe.svg"> Axe</div>
     <div class="nav-item" onclick="setMode('Mace')"><img src="https://mctiers.com/tier_icons/mace.svg"> Mace</div>
+    <div class="nav-item" onclick="setMode('DiaSmp')"><img src="https://www.centraltierlist.com/icons/diasmp.svg"> DiaSmp</div>
 </div>
 
 <div class="top-controls">
-    <input type="text" class="search-box" id="search" placeholder="Search player..." oninput="render()">
+    <input type="text" class="search-box" id="search" placeholder="Search name & Enter..." oninput="render()" onkeydown="if(event.key === 'Enter') quickSearchOpen()">
 </div>
 
 <div id="view-overall" class="list-container"></div>
-<div id="view-grid" class="grid-container"></div>
+<div id="view-grid" class="grid-container" style="display:none; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap:10px; padding:10px;"></div>
 
-<div class="admin-bar">
-    <button class="admin-btn" onclick="addPlayer()">Update Database (Admin)</button>
-    <button class="admin-btn" onclick="removePlayer()">Remove Player</button>
+<div id="playerModal" class="modal">
+    <div class="modal-content">
+        <span onclick="closeModal()" style="position:absolute; right:20px; top:10px; font-size:30px; cursor:pointer;">&times;</span>
+        <img id="m-img" src="" style="width:90px; height:90px; border-radius:12px; border:3px solid var(--accent);">
+        <div id="m-rank" style="color:var(--accent); font-weight:900; font-size:20px; margin-top:10px;"></div>
+        <div id="m-region-box" style="margin-top:5px;"></div> <h2 id="m-name" style="margin:5px 0;"></h2>
+        <div id="m-tag"></div>
+        <div id="m-pts" style="font-size:14px; font-weight:800; color:var(--text-dim); margin-top:5px;"></div>
+        <div class="modal-stats" id="m-stats"></div>
+    </div>
+</div>
+
+<div id="adminPanel">
+    <button class="admin-btn" onclick="addPlayer()">Update Database</button>
+    <button class="admin-btn" style="background:#2a1616; color:#ff4444;" onclick="removePlayer()">Remove Player</button>
 </div>
 
 <script type="module">
@@ -140,10 +148,7 @@ import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc } from "https
 const firebaseConfig = {
     apiKey: "AIzaSyB3FmL5sS2UvJVkn5nzsocM05FWhnWd8t4",
     authDomain: "mansi-d5481.firebaseapp.com",
-    databaseURL: "https://mansi-d5481.firebaseio.com",
     projectId: "mansi-d5481",
-    storageBucket: "mansi-d5481.firebasestorage.app",
-    messagingSenderId: "119988529319",
     appId: "1:119988529319:web:f1aae38862c89ca0c31382"
 };
 
@@ -153,24 +158,15 @@ const playersRef = collection(db, "players");
 
 let players = [];
 let currentMode = "Overall";
-
-const gameModes = ["Vanilla", "Pot", "NethPot", "Smp", "Uhc", "Sword", "Axe", "Mace"];
+const gameModes = ["Vanilla", "Pot", "NethPot", "Smp", "Uhc", "Sword", "Axe", "Mace", "DiaSmp"];
 const iconLinks = {
     Vanilla: "https://mctiers.com/tier_icons/vanilla.svg", Pot: "https://mctiers.com/tier_icons/pot.svg",
     NethPot: "https://mctiers.com/tier_icons/nethop.svg", Smp: "https://mctiers.com/tier_icons/smp.svg",
     Uhc: "https://mctiers.com/tier_icons/uhc.svg", Sword: "https://mctiers.com/tier_icons/sword.svg",
-    Axe: "https://mctiers.com/tier_icons/axe.svg", Mace: "https://mctiers.com/tier_icons/mace.svg"
+    Axe: "https://mctiers.com/tier_icons/axe.svg", Mace: "https://mctiers.com/tier_icons/mace.svg",
+    DiaSmp: "https://www.centraltierlist.com/icons/diasmp.svg"
 };
-
-// UPDATED POINT SYSTEM
-const tierPoints = { 
-    "HT1": 60, "LT1": 45, 
-    "HT2": 30, "LT2": 20, 
-    "HT3": 10, "LT3": 6, 
-    "HT4": 4, "LT4": 3, 
-    "HT5": 2, "LT5": 1, 
-    "NONE": 0 
-};
+const tierPoints = { "HT1": 60, "LT1": 45, "HT2": 30, "LT2": 20, "HT3": 10, "LT3": 6, "HT4": 4, "LT4": 3, "HT5": 2, "LT5": 1, "NONE": 0 };
 
 async function loadData() {
     const snap = await getDocs(playersRef);
@@ -182,102 +178,115 @@ async function loadData() {
     render();
 }
 
+window.unlockAdmin = () => {
+    if(prompt("Admin Key:") === "RAHULCOMBATGRANDMASTER") document.getElementById("adminPanel").style.display = "flex";
+}
+
 window.setMode = (mode) => {
     currentMode = mode;
-    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-    event.currentTarget.classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(el => {
+        el.classList.remove('active');
+        if(el.innerText.trim().includes(mode)) el.classList.add('active');
+    });
     render();
 }
 
 function getTitleBadge(rank) {
-    if (rank === 1) return '<span class="title-tag tag-grand">Grand Master</span>';
-    if (rank <= 3) return '<span class="title-tag tag-master">Combat Master</span>';
-    if (rank <= 30) return '<span class="title-tag tag-ace">Combat Ace</span>';
-    if (rank <= 100) return '<span class="title-tag tag-spec">Combat Specialist</span>';
+    if (rank === 1) return '<span class="title-tag tag-grand">GRAND MASTER</span>';
+    if (rank <= 3) return '<span class="title-tag tag-master">COMBAT MASTER</span>';
     return '';
 }
 
+window.quickSearchOpen = () => {
+    const val = document.getElementById("search").value.toLowerCase();
+    const sorted = [...players].sort((a,b) => b.total - a.total);
+    const p = sorted.find(p => p.name.toLowerCase() === val);
+    if(p) showStatus(p.name, sorted.indexOf(p)+1);
+}
+
+window.showStatus = (name, rank) => {
+    const p = players.find(p => p.name === name);
+    document.getElementById("m-img").src = `https://mc-heads.net/head/${p.name}/120`;
+    document.getElementById("m-rank").innerText = `#${rank}`;
+    document.getElementById("m-region-box").innerHTML = `<span class="region-tag">${p.region || 'AS'}</span>`; // Region in Pop-up
+    document.getElementById("m-name").innerText = p.name;
+    document.getElementById("m-pts").innerText = `POINTS: ${p.total}`;
+    document.getElementById("m-tag").innerHTML = getTitleBadge(rank);
+    
+    document.getElementById("m-stats").innerHTML = gameModes.map(m => {
+        const tier = p[m] || 'NONE';
+        const isUnranked = tier === 'NONE';
+        return `
+            <div class="stat-item">
+                <img src="${iconLinks[m]}" class="${isUnranked ? 'is-unranked' : ''}" style="width:16px;">
+                <div style="text-align:left;">
+                    <div style="font-size:9px;color:gray;">${m}</div>
+                    <div style="font-size:11px;font-weight:800;color:${isUnranked ? '#4b5563':'var(--accent)'}">${isUnranked ? 'Unranked' : tier}</div>
+                </div>
+            </div>`;
+    }).join('');
+    document.getElementById("playerModal").style.display = "flex";
+}
+
+window.closeModal = () => document.getElementById("playerModal").style.display = "none";
+
 window.render = () => {
     const query = document.getElementById("search").value.toLowerCase();
-    const filtered = players.filter(p => p.name.toLowerCase().includes(query));
+    const sorted = [...players].sort((a,b) => b.total - a.total);
+    const filtered = sorted.filter(p => p.name.toLowerCase().includes(query));
+    
+    const overallCont = document.getElementById("view-overall");
+    const gridCont = document.getElementById("view-grid");
 
     if(currentMode === "Overall") {
-        document.getElementById("view-overall").style.display = "flex";
-        document.getElementById("view-grid").style.display = "none";
-        renderOverall(filtered);
-    } else {
-        document.getElementById("view-overall").style.display = "none";
-        document.getElementById("view-grid").style.display = "grid";
-        renderGrid(filtered);
-    }
-}
-
-function renderOverall(data) {
-    const cont = document.getElementById("view-overall");
-    cont.innerHTML = "";
-    data.sort((a,b) => b.total - a.total).forEach((p, i) => {
-        const rank = i + 1;
-        const row = document.createElement("div");
-        row.className = `player-row rank-${rank}`;
-        row.style.animationDelay = `${i * 0.05}s`;
-        row.innerHTML = `
-            <div class="rank-num">${rank}</div>
-            <img class="player-img" src="https://mc-heads.net/avatar/${p.name}/64">
-            <div class="player-main">
-                <span class="player-name">${p.name} ${getTitleBadge(rank)}</span>
-                <span class="player-pts">Kingdom Points: ${p.total}</span>
-            </div>
-            <div class="region-badge">${p.region || 'NA'}</div>
-            <div class="mini-tier-box">
-                ${gameModes.map(m => `
-                    <div class="mini-item">
-                        <img src="${iconLinks[m]}" class="mini-icon">
-                        <span class="mini-val">${p[m] || 'NONE'}</span>
+        overallCont.style.display = "flex";
+        gridCont.style.display = "none";
+        overallCont.innerHTML = filtered.map(p => {
+            const rank = sorted.indexOf(p) + 1;
+            return `
+                <div class="player-row" onclick="showStatus('${p.name}', ${rank})">
+                    <div class="rank-num">${rank}</div>
+                    <img class="player-img" src="https://mc-heads.net/head/${p.name}/64">
+                    <div class="player-main">
+                        <div class="name-tag-row">
+                            <span class="region-tag">${p.region || 'AS'}</span>
+                            <span style="font-weight:800;">${p.name}</span> ${getTitleBadge(rank)}
+                        </div>
+                        <div style="font-size:11px;color:var(--accent);font-weight:700;">POINTS: ${p.total}</div>
                     </div>
-                `).join('')}
-            </div>
-        `;
-        cont.appendChild(row);
-    });
-}
-
-function renderGrid(data) {
-    const cont = document.getElementById("view-grid");
-    cont.innerHTML = "";
-    ["T1", "T2", "T3", "T4", "T5"].forEach((t, idx) => {
-        const col = document.createElement("div");
-        col.className = "tier-column";
-        col.innerHTML = `<div class="tier-header t${idx+1}-h">Tier ${idx+1}</div>`;
-        data.filter(p => (p[currentMode] || "").includes(t)).sort((a,b) => a.name.localeCompare(b.name)).forEach(p => {
-            const pr = document.createElement("div");
-            pr.className = "grid-player";
-            pr.innerHTML = `<img src="https://mc-heads.net/avatar/${p.name}/32"> <span>${p.name}</span>`;
-            col.appendChild(pr);
-        });
-        cont.appendChild(col);
-    });
+                    <div class="stats-btn-text">STATS ></div>
+                </div>`;
+        }).join('');
+    } else {
+        overallCont.style.display = "none";
+        gridCont.style.display = "grid";
+        gridCont.innerHTML = ["T1", "T2", "T3", "T4", "T5"].map((t, i) => `
+            <div style="background:#12151f;border-radius:12px;border:1px solid var(--border);overflow:hidden;height:fit-content;">
+                <div style="text-align:center;padding:12px;font-weight:800;font-size:14px;border-bottom:1px solid var(--border);color:var(--tier${i+1})">Tier ${i+1}</div>
+                ${filtered.filter(p => (p[currentMode] || "").includes(t)).map(p => `
+                    <div style="padding:10px;border-bottom:1px solid #1e2433;display:flex;align-items:center;gap:12px;font-size:13px;cursor:pointer;" onclick="showStatus('${p.name}', ${sorted.indexOf(p)+1})">
+                        <span class="region-tag">${p.region || 'AS'}</span>
+                        <img src="https://mc-heads.net/avatar/${p.name}/24"> <span>${p.name}</span>
+                    </div>`).join('')}
+            </div>`).join('');
+    }
 }
 
 window.addPlayer = async () => {
-    if(prompt("Admin Key:") !== "RAHULCOMBATGRANDMASTER") return alert("Access Denied");
+    if(prompt("Admin Passkey Required:") !== "RAHULCOMBATGRANDMASTER") return alert("Unauthorized!");
     const name = prompt("Minecraft IGN:");
     if(!name) return;
-    const region = prompt("Region:", "NA").toUpperCase();
+    const region = prompt("Region (AS, IN, etc.):", "AS").toUpperCase();
     const update = { name, region };
-    for (const m of gameModes) {
-        update[m] = (prompt(`${m} Tier (HT1-LT5):`) || "NONE").toUpperCase();
-    }
+    for (const m of gameModes) { update[m] = (prompt(`${m} Tier:`) || "NONE").toUpperCase(); }
     await setDoc(doc(db, "players", name.toLowerCase()), update);
     loadData();
 }
 
 window.removePlayer = async () => {
-    if(prompt("Admin Key:") !== "RAHULCOMBATGRANDMASTER") return;
-    const name = prompt("IGN to delete:");
-    if(name) {
-        await deleteDoc(doc(db, "players", name.toLowerCase()));
-        loadData();
-    }
+    if(prompt("Admin Passkey Required:") !== "RAHULCOMBATGRANDMASTER") return alert("Unauthorized!");
+    const name = prompt("IGN to Delete:");
+    if(name) { await deleteDoc(doc(db, "players", name.toLowerCase())); loadData(); }
 }
 
 loadData();
