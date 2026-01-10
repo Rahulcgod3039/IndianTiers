@@ -3,118 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IndianTiers</title>
+    <title>IndianTiers Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* CSS Same as before */
         :root {
             --bg-body: #0b0e14;
             --bg-nav: #12161f;
             --bg-card: #161b26;
             --border: #232a3b;
             --accent: #ffb400;
-            --text-dim: #94a3b8;
+            --text-dim: #64748b;
+            --rank1: #ffb400;
+            --rank2: #94a3b8;
+            --rank3: #cd7f32;
+            --rank-other: #4b5563;
+            --tier-gray: #4b5563;
+            --retired-red: #ff4444;
             --tier1: #ffb400; --tier2: #94a3b8; --tier3: #cd7f32; --tier4: #4ade80; --tier5: #3b82f6;
         }
 
         body { font-family: 'Inter', sans-serif; background: var(--bg-body); color: white; margin: 0; padding-bottom: 50px; overflow-x: hidden; }
-
-        /* HEADER */
-        .header-top { padding: 15px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
-        .nav-logo img { height: 75px; width: auto; max-width: 100%; border-radius: 8px; }
-
-        .quick-links { display: flex; gap: 8px; width: 100%; max-width: 480px; justify-content: center; }
-        .link-btn { 
-            background: #1c2230; border: 1px solid var(--border); color: white; padding: 10px; 
-            border-radius: 8px; text-decoration: none; font-size: 11px; font-weight: 700; flex: 1; 
-            display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer;
-        }
-        .link-btn img { width: 14px; height: 14px; display: block; }
-
-        /* NAVBAR */
-        .navbar { 
-            background: var(--bg-nav); display: flex; gap: 5px; border-bottom: 1px solid var(--border); 
-            overflow-x: auto; position: sticky; top: 0; z-index: 100; padding: 0 10px;
-            scrollbar-width: none; -webkit-overflow-scrolling: touch;
-        }
-        .navbar::-webkit-scrollbar { display: none; }
-        .nav-item { 
-            padding: 15px 18px; cursor: pointer; color: var(--text-dim); font-weight: 700; 
-            display: flex; align-items: center; gap: 8px; font-size: 13px; white-space: nowrap;
-            border-bottom: 3px solid transparent;
-        }
-        .nav-item.active { color: white; border-bottom-color: #ffb400; background: #302E01; }
-        .nav-item img { width: 18px; height: 18px; }
-
-        /* SEARCH */
+        .header-top { padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .nav-logo img { height: 80px; width: auto; border-radius: 8px; }
+        .quick-links { display: flex; gap: 6px; width: 100%; max-width: 450px; justify-content: center; }
+        .link-btn { background: #1c2230; border: 1px solid var(--border); color: white; padding: 10px; border-radius: 8px; text-decoration: none; font-size: 10px; font-weight: 700; flex: 1; display: flex; align-items: center; justify-content: center; gap: 5px; cursor: pointer; }
+        .link-btn img { width: 14px !important; height: 14px !important; }
+        .navbar { background: var(--bg-nav); display: flex; gap: 5px; border-bottom: 1px solid var(--border); overflow-x: auto; position: sticky; top: 0; z-index: 100; padding: 0 10px; scrollbar-width: none; }
+        .nav-item { padding: 10px 14px; cursor: pointer; font-weight: 700; display: flex; align-items: center; gap: 8px; font-size: 11px; white-space: nowrap; border-bottom: 3px solid transparent; transition: all 0.3s ease; color: var(--text-dim); filter: grayscale(1); opacity: 0.6; }
+        .nav-item img { width: 16px !important; height: 16px !important; object-fit: contain; }
+        .nav-item.active { color: white !important; border-bottom-color: var(--accent) !important; background: rgba(255, 180, 0, 0.05); filter: grayscale(0); opacity: 1; }
         .top-controls { padding: 15px; display: flex; justify-content: center; }
-        .search-box { 
-            background: var(--bg-card); border: 1px solid var(--border); padding: 14px; 
-            border-radius: 10px; color: white; width: 100%; max-width: 500px; outline: none; font-size: 14px;
-        }
-
-        /* REGION BOX STYLE */
-        .region-tag {
-            background: rgba(255, 173, 252, 0.1);
-            color: #FFADFC;
-            border: 1px solid rgba(255, 173, 252, 0.4);
-            padding: 2px 6px;
-            border-radius: 6px;
-            font-size: 10px;
-            font-weight: 800;
-            text-align: center;
-            min-width: 20px;
-            display: inline-block;
-        }
-
-        /* LIST & ROW */
+        .search-box { background: var(--bg-card); border: 1px solid var(--border); padding: 12px; border-radius: 10px; color: white; width: 100%; max-width: 500px; outline: none; font-size: 14px; }
         .list-container { max-width: 1100px; margin: 0 auto; display: none; flex-direction: column; gap: 10px; padding: 0 15px; }
-        .player-row { background: var(--bg-card); border-radius: 12px; padding: 15px; display: flex; align-items: center; border: 1px solid var(--border); transition: 0.2s; cursor: pointer; }
-        .rank-num { font-size: 22px; font-weight: 800; width: 35px; color: #4b5563; font-style: italic; }
-        .player-img { width: 50px; height: 50px; border-radius: 8px; margin-right: 15px; }
-        .player-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
-        .name-tag-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .player-row { background: var(--bg-card); border-radius: 12px; padding: 12px; display: flex; align-items: center; border: 1px solid var(--border); cursor: pointer; position: relative; overflow: hidden; }
+        .player-row::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; animation: crownGlow 4s infinite; z-index: 0; }
+        @keyframes crownGlow { 0% { left: -100%; } 50% { left: 100%; } 100% { left: 100%; } }
+        .row-rank-1 { border: 1.5px solid var(--rank1) !important; box-shadow: 0 0 15px rgba(255, 180, 0, 0.1); }
+        .row-rank-1::after { background: linear-gradient(90deg, transparent, rgba(255, 180, 0, 0.25), transparent); }
+        .row-rank-2 { border: 1.5px solid var(--rank2) !important; }
+        .row-rank-2::after { background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent); }
+        .row-rank-3 { border: 1.5px solid var(--rank3) !important; }
+        .row-rank-3::after { background: linear-gradient(90deg, transparent, rgba(205, 127, 50, 0.25), transparent); }
+        .is-retired-row { border: 1.5px solid var(--retired-red) !important; opacity: 0.8; }
+        .rank-num-list { font-size: 11px; font-weight: 900; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 6px; margin-right: 15px; color: #fff; z-index: 1; flex-shrink: 0; }
+        .bg-rank-1 { background: var(--rank1); color: #000 !important; }
+        .bg-rank-2 { background: var(--rank2); color: #000 !important; }
+        .bg-rank-3 { background: var(--rank3); color: #000 !important; }
+        .bg-rank-other { background: var(--rank-other); }
+        .bg-retired { background: var(--retired-red); font-size: 8px; text-transform: uppercase; }
+        .player-img { width: 42px; height: 42px; border-radius: 8px; margin-right: 12px; z-index: 1; flex-shrink: 0; }
+        .player-main { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; z-index: 1; }
+        .region-tag { padding: 1px 6px; border-radius: 5px; font-size: 9px; font-weight: 800; text-transform: uppercase; width: fit-content; border: 1px solid transparent; }
+        .reg-as { background: rgba(255, 173, 252, 0.1); color: #FFADFC; border-color: rgba(255, 173, 252, 0.4); }
+        .reg-na { background: rgba(255, 68, 68, 0.1); color: #FF4444; border-color: rgba(255, 68, 68, 0.4); }
+        .point-tag { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 5px; font-size: 9px; font-weight: 800; text-transform: uppercase; width: fit-content; border: 1px solid transparent; }
+        .point-tag img { width: 12px; height: 12px; object-fit: contain; }
+        .tag-gm { background: rgba(255, 180, 0, 0.15); color: #ffb400; border-color: rgba(255, 180, 0, 0.3); }
+        .tag-master { background: rgba(255, 215, 0, 0.15); color: #ffd700; border-color: rgba(255, 215, 0, 0.3); }
+        .tag-ace { background: rgba(255, 68, 68, 0.15); color: #ff4444; border-color: rgba(255, 68, 68, 0.3); }
+        .tag-spec { background: rgba(168, 85, 247, 0.15); color: #a855f7; border-color: rgba(168, 85, 247, 0.3); }
+        .tag-cadet { background: rgba(230, 230, 250, 0.15); color: #e6e6fa; border-color: rgba(230, 230, 250, 0.3); }
+        .tag-novice { background: rgba(230, 230, 250, 0.15); color: #e6e6fa; border-color: rgba(230, 230, 250, 0.3); }
+        .tag-rookie { background: rgba(156, 163, 175, 0.15); color: #9ca3af; border-color: rgba(156, 163, 175, 0.3); }
+        .points-label { color: var(--accent); font-weight: 800; font-size: 11px; }
+        .stats-btn-box { display: flex; flex-direction: column; align-items: center; gap: 2px; margin-left: auto; z-index: 1; flex-shrink: 0; }
+        .stats-icon { width: 18px; height: 18px; }
+        .stats-r1 { filter: invert(70%) sepia(90%) saturate(1000%) hue-rotate(10deg); }
+        .stats-r2 { filter: grayscale(1) brightness(1.5); }
+        .stats-r3 { filter: invert(40%) sepia(60%) saturate(600%) hue-rotate(5deg); }
+        .stats-ro { filter: grayscale(1) opacity(0.5); }
+        .grid-container { max-width: 1200px; margin: 0 auto; display: none; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; padding: 12px; }
+        .grid-tier-box { background: var(--bg-card); border-radius: 14px; border: 1px solid var(--border); padding-bottom: 10px; height: fit-content; }
+        .grid-tier-header { text-align: center; padding: 10px; font-weight: 800; font-size: 12px; border-bottom: 1px solid var(--border); text-transform: uppercase; margin-bottom: 8px; }
+        .grid-player-card { padding: 8px; margin: 0 8px 6px 8px; background: rgba(255,255,255,0.03); border-radius: 8px; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: 0.15s; min-width: 0; }
+        .grid-avatar { width: 26px; height: 26px; border-radius: 4px; }
+        .grid-name { font-size: 10.5px; font-weight: 700; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); justify-content: center; align-items: center; padding: 10px; opacity: 0; transition: 0.3s; }
+        .modal.show { display: flex; opacity: 1; }
+        .modal-content { background: var(--bg-nav); padding: 35px 20px 25px 20px; border-radius: 28px; border: 1px solid var(--border); width: 100%; max-width: 350px; text-align: center; position: relative; max-height: 90vh; overflow-y: auto; box-sizing: border-box; }
+        .close-btn { position: absolute; right: 20px; top: 20px; color: #4b5563; cursor: pointer; font-size: 22px; z-index: 10; opacity: 0.7; }
+        .modal-avatar { width: 85px; height: 85px; border-radius: 12px; border: 3px solid #1c2230; margin: 0 auto 15px auto; display: block; position: relative; z-index: 5; transition: 0.3s; }
+        @keyframes slowPulse { 0%, 100% { box-shadow: 0 0 10px var(--glow-color); } 50% { box-shadow: 0 0 30px var(--glow-color); } }
+        .modal.rank-1-glow .modal-avatar { --glow-color: var(--rank1); border-color: var(--rank1); animation: slowPulse 3s infinite; }
+        .modal.rank-2-glow .modal-avatar { --glow-color: var(--rank2); border-color: var(--rank2); animation: slowPulse 3s infinite; }
+        .modal.rank-3-glow .modal-avatar { --glow-color: var(--rank3); border-color: var(--rank3); animation: slowPulse 3s infinite; }
+        .name-wrapper { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 5px; }
+        .m-namemc-icon { display: flex; align-items: center; justify-content: center; text-decoration: none; border-radius: 6px; transition: 0.2s; }
+        .m-namemc-icon img { width: 20px !important; height: 20px !important; border-radius: 4px; border: 1.5px solid #4b5563; }
+        .pos-container { background: #0b0e14; border-radius: 14px; padding: 12px 18px; display: inline-flex; align-items: center; justify-content: center; margin: 20px auto; border: 1px solid var(--border); width: fit-content; max-width: 95%; box-sizing: border-box; }
+        .pos-rank-num { font-style: italic; font-weight: 900; font-size: 26px; color: white; margin-right: 15px; padding-right: 15px; border-right: 2px solid #1c2230; line-height: 1; }
+        .pts-text-wrap { font-size: 11px; font-weight: 800; color: white; text-transform: uppercase; text-align: left; line-height: 1.2; }
+        .section-title { font-size: 10px; font-weight: 900; color: #4b5563; text-align: left; margin-top: 15px; margin-bottom: 8px; letter-spacing: 1px; text-transform: uppercase; }
+        .section-retired-title { color: var(--retired-red); }
+        .tiers-box { background: rgba(255,255,255,0.01); border-radius: 18px; padding: 12px 5px; border: 1px solid var(--border); display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 8px; }
+        .tier-item { display: flex; flex-direction: column; align-items: center; gap: 3px; width: 42px; flex-shrink: 0; }
+        .icon-circle { width: 30px; height: 30px; background: #0b0e14; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); }
+        .tier-icon { width: 16px; height: 16px; object-fit: contain; }
+        .tier-val { font-size: 8px; font-weight: 900; color: var(--accent); }
+        .is-unranked .tier-icon, .is-retired-gray .tier-icon { filter: grayscale(1); opacity: 0.3; }
+        .is-unranked .tier-val, .is-retired-gray .tier-val { color: var(--tier-gray) !important; }
+        #adminPanel { display: none; padding: 20px; flex-direction: column; gap: 8px; max-width: 400px; margin: 0 auto; text-align: center; }
+        .admin-btn { background: #1c2230; border: 1px solid var(--border); color: white; padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.2s; }
         
-        .title-tag { font-size: 10px; font-weight: 900; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; }
-        .tag-grand { background: var(--accent); color: black; }
-        .tag-master { background: #e2e8f0; color: black; }
-        .stats-btn-text { color: var(--accent); font-weight: 800; font-size: 11px; white-space: nowrap; margin-left: 10px; }
-
-        /* MODAL */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); justify-content: center; align-items: center; padding: 15px; }
-        .modal-content { background: var(--bg-nav); padding: 25px; border-radius: 20px; border: 1px solid var(--accent); width: 100%; max-width: 400px; text-align: center; position: relative; }
-        .modal-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        .stat-item { background: var(--bg-card); padding: 10px; border-radius: 10px; border: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
-        .is-unranked { filter: grayscale(1); opacity: 0.4; }
-
-        /* ADMIN BAR */
-        #adminPanel { display: none; padding: 30px 15px; flex-direction: column; gap: 12px; max-width: 500px; margin: 0 auto; }
-        .admin-btn { width: 100%; background: #1c2230; border: 1px solid var(--border); color: white; padding: 16px; border-radius: 10px; font-weight: 700; cursor: pointer; }
+        /* Hidden input for password prompt workaround */
+        #hiddenPass { position: fixed; top: -100px; }
     </style>
 </head>
 <body>
 
+<input type="password" id="hiddenPass">
+
 <div class="header-top">
-    <div class="nav-logo">
-        <img src="https://cdn.discordapp.com/attachments/1455267729614573795/1458775180477333545/1767869439071.png?ex=6960ddc1&is=695f8c41&hm=cc53b721a8bd778be6ecc976e18a5214f75801e815a854125f4f50abaa0e9411&" alt="logo">
-    </div>
+    <div class="nav-logo"><img src="https://cdn.discordapp.com/attachments/1455267729614573795/1458775180477333545/1767869439071.png?ex=6962d801&is=69618681&hm=0b1546a32807615040af246e7bbe3da4f4a660f3475ad0fb144bce3adc6acd17&"></div>
     <div class="quick-links">
-        <div class="link-btn" onclick="setMode('Overall')"><img src="https://www.centraltierlist.com/icons/trophy.svg"> Ranking</div>
+        <div class="link-btn" onclick="setMode('Overall', document.querySelector('.navbar .nav-item'))"><img src="https://www.centraltierlist.com/icons/trophy.svg"> Ranking</div>
         <a href="#" class="link-btn"><img src="https://www.svgrepo.com/show/353655/discord-icon.svg"> Discord</a>
         <div class="link-btn" onclick="unlockAdmin()"><img src="https://cdn-icons-png.flaticon.com/512/2206/2206368.png"> Admin Only</div>
     </div>
 </div>
 
 <div class="navbar" id="mode-nav">
-    <div class="nav-item active" onclick="setMode('Overall')"><img src="https://www.centraltierlist.com/icons/trophy.svg"> Overall</div>
-    <div class="nav-item" onclick="setMode('Vanilla')"><img src="https://mctiers.com/tier_icons/vanilla.svg"> Vanilla</div>
-    <div class="nav-item" onclick="setMode('Pot')"><img src="https://mctiers.com/tier_icons/pot.svg"> Pot</div>
-    <div class="nav-item" onclick="setMode('NethPot')"><img src="https://mctiers.com/tier_icons/nethop.svg"> NethPot</div>
-    <div class="nav-item" onclick="setMode('Smp')"><img src="https://mctiers.com/tier_icons/smp.svg"> Smp</div>
-    <div class="nav-item" onclick="setMode('Uhc')"><img src="https://mctiers.com/tier_icons/uhc.svg"> Uhc</div>
-    <div class="nav-item" onclick="setMode('Sword')"><img src="https://mctiers.com/tier_icons/sword.svg"> Sword</div>
-    <div class="nav-item" onclick="setMode('Axe')"><img src="https://mctiers.com/tier_icons/axe.svg"> Axe</div>
-    <div class="nav-item" onclick="setMode('Mace')"><img src="https://mctiers.com/tier_icons/mace.svg"> Mace</div>
-    <div class="nav-item" onclick="setMode('DiaSmp')"><img src="https://www.centraltierlist.com/icons/diasmp.svg"> DiaSmp</div>
+    <div class="nav-item active" onclick="setMode('Overall', this)"><img src="https://www.centraltierlist.com/icons/trophy.svg"> Overall</div>
+    <div class="nav-item" onclick="setMode('Vanilla', this)"><img src="https://mctiers.com/tier_icons/vanilla.svg"> Vanilla</div>
+    <div class="nav-item" onclick="setMode('Pot', this)"><img src="https://mctiers.com/tier_icons/pot.svg"> Pot</div>
+    <div class="nav-item" onclick="setMode('NethPot', this)"><img src="https://mctiers.com/tier_icons/nethop.svg"> NethPot</div>
+    <div class="nav-item" onclick="setMode('Smp', this)"><img src="https://mctiers.com/tier_icons/smp.svg"> Smp</div>
+    <div class="nav-item" onclick="setMode('Uhc', this)"><img src="https://mctiers.com/tier_icons/uhc.svg"> Uhc</div>
+    <div class="nav-item" onclick="setMode('Sword', this)"><img src="https://mctiers.com/tier_icons/sword.svg"> Sword</div>
+    <div class="nav-item" onclick="setMode('Axe', this)"><img src="https://mctiers.com/tier_icons/axe.svg"> Axe</div>
+    <div class="nav-item" onclick="setMode('Mace', this)"><img src="https://mctiers.com/tier_icons/mace.svg"> Mace</div>
+    <div class="nav-item" onclick="setMode('DiaSmp', this)"><img src="https://www.centraltierlist.com/icons/diasmp.svg"> DiaSmp</div>
 </div>
 
 <div class="top-controls">
@@ -122,36 +141,43 @@
 </div>
 
 <div id="view-overall" class="list-container"></div>
-<div id="view-grid" class="grid-container" style="display:none; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap:10px; padding:10px;"></div>
+<div id="view-grid" class="grid-container"></div>
 
 <div id="playerModal" class="modal">
     <div class="modal-content">
-        <span onclick="closeModal()" style="position:absolute; right:20px; top:10px; font-size:30px; cursor:pointer;">&times;</span>
-        <img id="m-img" src="" style="width:90px; height:90px; border-radius:12px; border:3px solid var(--accent);">
-        <div id="m-rank" style="color:var(--accent); font-weight:900; font-size:20px; margin-top:10px;"></div>
-        <div id="m-region-box" style="margin-top:5px;"></div> <h2 id="m-name" style="margin:5px 0;"></h2>
-        <div id="m-tag"></div>
-        <div id="m-pts" style="font-size:14px; font-weight:800; color:var(--text-dim); margin-top:5px;"></div>
-        <div class="modal-stats" id="m-stats"></div>
+        <span onclick="closeModal()" class="close-btn">&times;</span>
+        <img id="m-img" class="modal-avatar" src="">
+        <div class="name-wrapper">
+            <div id="m-name" style="font-size: 22px; font-weight: 800; color: white;"></div>
+            <a id="m-namemc-link" href="#" target="_blank" class="m-namemc-icon">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsMp4jleWSjmpw00lLAJSXyEKSe-qCuqjWGVdCmnpKBw&s">
+            </a>
+        </div>
+        <div id="m-point-tag" class="point-tag"></div>
+        <div id="m-region-full" style="color: var(--retired-red); font-size: 11px; font-weight: 800; margin: 10px 0; text-transform: uppercase;"></div>
+        <div class="pos-container">
+            <div id="m-rank-num" class="pos-rank-num"></div>
+            <div class="pts-text-wrap" id="m-pts-container">OVERALL <b id="m-pts-val" style="color:var(--accent);"></b> POINTS</div>
+        </div>
+        <div class="section-title">TIERS</div>
+        <div class="tiers-box" id="m-active-stats"></div>
+        <div class="section-title section-retired-title">RETIRED</div>
+        <div class="tiers-box" id="m-retired-stats"></div>
     </div>
 </div>
 
 <div id="adminPanel">
     <button class="admin-btn" onclick="addPlayer()">Update Database</button>
+    <button class="admin-btn" style="color: #3b82f6;" onclick="retireGameMode()">Retirement (Gamemode)</button>
+    <button class="admin-btn" style="color: #3b82f6;" onclick="unretireGameMode()">Remove Retirement</button>
     <button class="admin-btn" style="background:#2a1616; color:#ff4444;" onclick="removePlayer()">Remove Player</button>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyB3FmL5sS2UvJVkn5nzsocM05FWhnWd8t4",
-    authDomain: "mansi-d5481.firebaseapp.com",
-    projectId: "mansi-d5481",
-    appId: "1:119988529319:web:f1aae38862c89ca0c31382"
-};
-
+const firebaseConfig = { apiKey: "AIzaSyB3FmL5sS2UvJVkn5nzsocM05FWhnWd8t4", authDomain: "mansi-d5481.firebaseapp.com", projectId: "mansi-d5481", appId: "1:119988529319:web:f1aae38862c89ca0c31382" };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const playersRef = collection(db, "players");
@@ -159,134 +185,201 @@ const playersRef = collection(db, "players");
 let players = [];
 let currentMode = "Overall";
 const gameModes = ["Vanilla", "Pot", "NethPot", "Smp", "Uhc", "Sword", "Axe", "Mace", "DiaSmp"];
-const iconLinks = {
-    Vanilla: "https://mctiers.com/tier_icons/vanilla.svg", Pot: "https://mctiers.com/tier_icons/pot.svg",
-    NethPot: "https://mctiers.com/tier_icons/nethop.svg", Smp: "https://mctiers.com/tier_icons/smp.svg",
-    Uhc: "https://mctiers.com/tier_icons/uhc.svg", Sword: "https://mctiers.com/tier_icons/sword.svg",
-    Axe: "https://mctiers.com/tier_icons/axe.svg", Mace: "https://mctiers.com/tier_icons/mace.svg",
-    DiaSmp: "https://www.centraltierlist.com/icons/diasmp.svg"
-};
+const iconLinks = { Vanilla: "https://mctiers.com/tier_icons/vanilla.svg", Pot: "https://mctiers.com/tier_icons/pot.svg", NethPot: "https://mctiers.com/tier_icons/nethop.svg", Smp: "https://mctiers.com/tier_icons/smp.svg", Uhc: "https://mctiers.com/tier_icons/uhc.svg", Sword: "https://mctiers.com/tier_icons/sword.svg", Axe: "https://mctiers.com/tier_icons/axe.svg", Mace: "https://mctiers.com/tier_icons/mace.svg", DiaSmp: "https://www.centraltierlist.com/icons/diasmp.svg" };
 const tierPoints = { "HT1": 60, "LT1": 45, "HT2": 30, "LT2": 20, "HT3": 10, "LT3": 6, "HT4": 4, "LT4": 3, "HT5": 2, "LT5": 1, "NONE": 0 };
+const regionFullNames = { "AS": "ASIA", "NA": "NORTH AMERICA", "EU": "EUROPE", "AU": "AUSTRALIA" };
+
+const ADMIN_KEY = "RAHULCOMBATGRANDMASTER";
+
+// Function to handle secure password input (Prompt replacement)
+function securePrompt(message) {
+    let pass = prompt(message);
+    return pass;
+}
+
+function getPlayerTag(pts) {
+    if(pts >= 400) return { text: "Combat GrandMaster", class: "tag-gm", icon: "https://mctiers.com/titles/combat_grandmaster.webp" };
+    if(pts >= 250) return { text: "Combat Master", class: "tag-master", icon: "https://mctiers.com/titles/combat_master.webp" };
+    if(pts >= 100) return { text: "Combat Ace", class: "tag-ace", icon: "https://mctiers.com/titles/combat_ace.svg" };
+    if(pts >= 50) return { text: "Combat Specialist", class: "tag-spec", icon: "https://mctiers.com/titles/combat_specialist.svg" };
+    if(pts >= 20) return { text: "Combat Cadet", class: "tag-cadet", icon: "https://mctiers.com/titles/combat_cadet.svg" };
+    if(pts >= 10) return { text: "Combat Novice", class: "tag-novice", icon: "https://mctiers.com/titles/combat_novice.svg" };
+    return { text: "Rookie", class: "tag-rookie", icon: "https://mctiers.com/titles/rookie.svg" };
+}
+
+function getRegionClass(reg) {
+    const r = (reg || "AS").toUpperCase();
+    return r === "NA" ? "reg-na" : "reg-as";
+}
 
 async function loadData() {
-    const snap = await getDocs(playersRef);
-    players = snap.docs.map(d => {
-        let data = d.data();
-        data.total = gameModes.reduce((sum, m) => sum + (tierPoints[data[m]] || 0), 0);
-        return data;
-    });
-    render();
+    try {
+        const snap = await getDocs(playersRef);
+        players = snap.docs.map(d => {
+            let data = d.data();
+            data.total = gameModes.reduce((sum, m) => sum + (tierPoints[data[m]] || 0), 0);
+            return data;
+        });
+        render();
+    } catch(e) { console.error(e); }
 }
-
-window.unlockAdmin = () => {
-    if(prompt("Admin Key:") === "RAHULCOMBATGRANDMASTER") document.getElementById("adminPanel").style.display = "flex";
-}
-
-window.setMode = (mode) => {
-    currentMode = mode;
-    document.querySelectorAll('.nav-item').forEach(el => {
-        el.classList.remove('active');
-        if(el.innerText.trim().includes(mode)) el.classList.add('active');
-    });
-    render();
-}
-
-function getTitleBadge(rank) {
-    if (rank === 1) return '<span class="title-tag tag-grand">GRAND MASTER</span>';
-    if (rank <= 3) return '<span class="title-tag tag-master">COMBAT MASTER</span>';
-    return '';
-}
-
-window.quickSearchOpen = () => {
-    const val = document.getElementById("search").value.toLowerCase();
-    const sorted = [...players].sort((a,b) => b.total - a.total);
-    const p = sorted.find(p => p.name.toLowerCase() === val);
-    if(p) showStatus(p.name, sorted.indexOf(p)+1);
-}
-
-window.showStatus = (name, rank) => {
-    const p = players.find(p => p.name === name);
-    document.getElementById("m-img").src = `https://mc-heads.net/head/${p.name}/120`;
-    document.getElementById("m-rank").innerText = `#${rank}`;
-    document.getElementById("m-region-box").innerHTML = `<span class="region-tag">${p.region || 'AS'}</span>`; // Region in Pop-up
-    document.getElementById("m-name").innerText = p.name;
-    document.getElementById("m-pts").innerText = `POINTS: ${p.total}`;
-    document.getElementById("m-tag").innerHTML = getTitleBadge(rank);
-    
-    document.getElementById("m-stats").innerHTML = gameModes.map(m => {
-        const tier = p[m] || 'NONE';
-        const isUnranked = tier === 'NONE';
-        return `
-            <div class="stat-item">
-                <img src="${iconLinks[m]}" class="${isUnranked ? 'is-unranked' : ''}" style="width:16px;">
-                <div style="text-align:left;">
-                    <div style="font-size:9px;color:gray;">${m}</div>
-                    <div style="font-size:11px;font-weight:800;color:${isUnranked ? '#4b5563':'var(--accent)'}">${isUnranked ? 'Unranked' : tier}</div>
-                </div>
-            </div>`;
-    }).join('');
-    document.getElementById("playerModal").style.display = "flex";
-}
-
-window.closeModal = () => document.getElementById("playerModal").style.display = "none";
 
 window.render = () => {
-    const query = document.getElementById("search").value.toLowerCase();
-    const sorted = [...players].sort((a,b) => b.total - a.total);
-    const filtered = sorted.filter(p => p.name.toLowerCase().includes(query));
+    const sortedActive = players.filter(p => p.status !== "Retired").sort((a,b) => b.total - a.total);
+    const retiredList = players.filter(p => p.status === "Retired");
+    const searchVal = document.getElementById("search").value.toLowerCase();
     
-    const overallCont = document.getElementById("view-overall");
+    const filteredActive = sortedActive.filter(p => p.name.toLowerCase().includes(searchVal));
+    const filteredRetired = retiredList.filter(p => p.name.toLowerCase().includes(searchVal));
+
+    const listCont = document.getElementById("view-overall");
     const gridCont = document.getElementById("view-grid");
 
     if(currentMode === "Overall") {
-        overallCont.style.display = "flex";
-        gridCont.style.display = "none";
-        overallCont.innerHTML = filtered.map(p => {
-            const rank = sorted.indexOf(p) + 1;
-            return `
-                <div class="player-row" onclick="showStatus('${p.name}', ${rank})">
-                    <div class="rank-num">${rank}</div>
-                    <img class="player-img" src="https://mc-heads.net/head/${p.name}/64">
-                    <div class="player-main">
-                        <div class="name-tag-row">
-                            <span class="region-tag">${p.region || 'AS'}</span>
-                            <span style="font-weight:800;">${p.name}</span> ${getTitleBadge(rank)}
-                        </div>
-                        <div style="font-size:11px;color:var(--accent);font-weight:700;">POINTS: ${p.total}</div>
+        listCont.style.display = "flex"; gridCont.style.display = "none";
+        let html = filteredActive.map(p => {
+            const rank = sortedActive.findIndex(pl => pl.name === p.name) + 1;
+            const tag = getPlayerTag(p.total);
+            let rowClass = (rank === 1) ? "row-rank-1" : (rank === 2) ? "row-rank-2" : (rank === 3) ? "row-rank-3" : "row-rank-other";
+            let numClass = (rank === 1) ? "bg-rank-1" : (rank === 2) ? "bg-rank-2" : (rank === 3) ? "bg-rank-3" : "bg-rank-other";
+            let sColor = rank <= 3 ? `stats-r${rank}` : "stats-ro";
+
+            return `<div class="player-row ${rowClass}" onclick="showStatus('${p.name}')">
+                <div class="rank-num-list ${numClass}">${rank}</div>
+                <img class="player-img" src="https://mc-heads.net/head/${p.name}/64">
+                <div class="player-main">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span class="region-tag ${getRegionClass(p.region)}">${p.region || 'AS'}</span>
+                        <span style="font-weight: 800;">${p.name}</span>
                     </div>
-                    <div class="stats-btn-text">STATS ></div>
-                </div>`;
+                    <span class="point-tag ${tag.class}"><img src="${tag.icon}"> ${tag.text}</span>
+                    <span class="points-label">POINTS: ${p.total}</span>
+                </div>
+                <div class="stats-btn-box">
+                    <img src="https://cdn-icons-png.flaticon.com/512/5953/5953496.png" class="stats-icon ${sColor}">
+                </div>
+            </div>`;
         }).join('');
+        listCont.innerHTML = html;
     } else {
-        overallCont.style.display = "none";
-        gridCont.style.display = "grid";
-        gridCont.innerHTML = ["T1", "T2", "T3", "T4", "T5"].map((t, i) => `
-            <div style="background:#12151f;border-radius:12px;border:1px solid var(--border);overflow:hidden;height:fit-content;">
-                <div style="text-align:center;padding:12px;font-weight:800;font-size:14px;border-bottom:1px solid var(--border);color:var(--tier${i+1})">Tier ${i+1}</div>
-                ${filtered.filter(p => (p[currentMode] || "").includes(t)).map(p => `
-                    <div style="padding:10px;border-bottom:1px solid #1e2433;display:flex;align-items:center;gap:12px;font-size:13px;cursor:pointer;" onclick="showStatus('${p.name}', ${sorted.indexOf(p)+1})">
-                        <span class="region-tag">${p.region || 'AS'}</span>
-                        <img src="https://mc-heads.net/avatar/${p.name}/24"> <span>${p.name}</span>
-                    </div>`).join('')}
-            </div>`).join('');
+        listCont.style.display = "none"; gridCont.style.display = "grid";
+        gridCont.innerHTML = ["HT1", "LT1", "HT2", "LT2", "HT3", "LT3", "HT4", "LT4", "HT5", "LT5"].map(tierLabel => {
+            const tierPlayers = players.filter(p => p[currentMode] === tierLabel && !(p.retiredModes && p.retiredModes.includes(currentMode)));
+            if(tierPlayers.length === 0) return '';
+            let tColor = tierLabel.includes("1") ? "var(--tier1)" : tierLabel.includes("2") ? "var(--tier2)" : tierLabel.includes("3") ? "var(--tier3)" : tierLabel.includes("4") ? "var(--tier4)" : "var(--tier5)";
+            return `<div class="grid-tier-box"><div class="grid-tier-header" style="color:${tColor}">${tierLabel}</div>${tierPlayers.map(p => `<div class="grid-player-card" onclick="showStatus('${p.name}')"><span class="region-tag ${getRegionClass(p.region)}" style="font-size:7px; padding:1px 4px;">${p.region || 'AS'}</span><img src="https://mc-heads.net/avatar/${p.name}/24" class="grid-avatar"><div class="grid-name">${p.name}</div></div>`).join('')}</div>`;
+        }).join('');
     }
 }
 
+window.showStatus = (name) => {
+    const p = players.find(pl => pl.name === name);
+    const sortedActive = players.filter(pl => pl.status !== "Retired").sort((a,b) => b.total - a.total);
+    const rank = sortedActive.findIndex(pl => pl.name === name) + 1;
+    const modal = document.getElementById("playerModal");
+    modal.className = "modal"; 
+    
+    if(rank <= 3) modal.classList.add(`rank-${rank}-glow`);
+
+    document.getElementById("m-img").src = `https://mc-heads.net/avatar/${p.name}/100`;
+    document.getElementById("m-name").innerText = p.name;
+    document.getElementById("m-namemc-link").href = `https://namemc.com/search?q=${p.name}`;
+    document.getElementById("m-rank-num").innerText = rank + ".";
+    
+    const tag = getPlayerTag(p.total);
+    document.getElementById("m-pts-container").innerHTML = `OVERALL <b style="color:var(--accent);">${p.total}</b> POINTS`;
+    const tagSpan = document.getElementById("m-point-tag");
+    tagSpan.innerHTML = `<img src="${tag.icon}"> ${tag.text}`;
+    tagSpan.className = "point-tag " + tag.class;
+    
+    const regSpan = document.getElementById("m-region-full");
+    regSpan.innerText = regionFullNames[p.region.toUpperCase()] || p.region || 'ASIA';
+    regSpan.style.color = (p.region.toUpperCase() === "NA") ? "#FF4444" : "#FFADFC";
+
+    let activeHtml = ""; let retiredHtml = "";
+    gameModes.forEach(m => {
+        const t = p[m] || 'NONE';
+        const isModeRetired = p.retiredModes && p.retiredModes.includes(m);
+        const iconHtml = `<div class="icon-circle"><img src="${iconLinks[m]}" class="tier-icon"></div><div class="tier-val">${t === 'NONE' ? '-' : t}</div>`;
+        if(isModeRetired) {
+            activeHtml += `<div class="tier-item is-retired-gray">${iconHtml}</div>`;
+            retiredHtml += `<div class="tier-item">${iconHtml}</div>`;
+        } else {
+            activeHtml += `<div class="tier-item ${t === 'NONE' ? 'is-unranked' : ''}">${iconHtml}</div>`;
+            retiredHtml += `<div class="tier-item is-unranked"><div class="icon-circle"><img src="${iconLinks[m]}" class="tier-icon"></div><div class="tier-val">-</div></div>`;
+        }
+    });
+    document.getElementById("m-active-stats").innerHTML = activeHtml;
+    document.getElementById("m-retired-stats").innerHTML = retiredHtml;
+    modal.style.display = "flex"; setTimeout(() => modal.classList.add("show"), 10);
+}
+
+window.unlockAdmin = () => {
+    if(securePrompt("Key:") === ADMIN_KEY) document.getElementById("adminPanel").style.display = "flex";
+}
+
 window.addPlayer = async () => {
-    if(prompt("Admin Passkey Required:") !== "RAHULCOMBATGRANDMASTER") return alert("Unauthorized!");
-    const name = prompt("Minecraft IGN:");
-    if(!name) return;
-    const region = prompt("Region (AS, IN, etc.):", "AS").toUpperCase();
-    const update = { name, region };
-    for (const m of gameModes) { update[m] = (prompt(`${m} Tier:`) || "NONE").toUpperCase(); }
-    await setDoc(doc(db, "players", name.toLowerCase()), update);
+    if(securePrompt("Admin Key:") !== ADMIN_KEY) return;
+    
+    const name = prompt("IGN:"); if(!name) return;
+    const region = prompt("Region (AS/NA/EU):", "AS").toUpperCase();
+    
+    let playerData = { 
+        name, 
+        region, 
+        status: "Active", 
+        retiredModes: [] 
+    };
+
+    // Asking for each GameMode Tier
+    for (let mode of gameModes) {
+        const tier = prompt(`Tier for ${mode} (HT1, LT1, HT2, LT2, HT3, LT3, HT4, LT4, HT5, LT5, or NONE):`, "NONE").toUpperCase();
+        playerData[mode] = tier;
+    }
+
+    await setDoc(doc(db, "players", name.toLowerCase()), playerData);
+    alert("Player " + name + " added successfully!");
     loadData();
 }
 
 window.removePlayer = async () => {
-    if(prompt("Admin Passkey Required:") !== "RAHULCOMBATGRANDMASTER") return alert("Unauthorized!");
+    if(securePrompt("Admin Key:") !== ADMIN_KEY) return;
     const name = prompt("IGN to Delete:");
-    if(name) { await deleteDoc(doc(db, "players", name.toLowerCase())); loadData(); }
+    if(name && confirm(`Delete ${name}?`)) { 
+        await deleteDoc(doc(db, "players", name.toLowerCase())); 
+        loadData(); 
+    }
+}
+
+window.retireGameMode = async () => {
+    if(securePrompt("Admin Key:") !== ADMIN_KEY) return;
+    const name = prompt("IGN:"); if(!name) return;
+    const mode = prompt("GameMode to Retire:"); if(!mode) return;
+    const pData = players.find(pl => pl.name.toLowerCase() === name.toLowerCase());
+    if(!pData) return alert("Player not found!");
+    let retiredList = pData.retiredModes || [];
+    if(!retiredList.includes(mode)) retiredList.push(mode);
+    await updateDoc(doc(db, "players", name.toLowerCase()), { retiredModes: retiredList });
+    alert("Retired in " + mode); loadData();
+}
+
+window.unretireGameMode = async () => {
+    if(securePrompt("Admin Key:") !== ADMIN_KEY) return;
+    const name = prompt("IGN:"); if(!name) return;
+    const mode = prompt("GameMode to Restore:"); if(!mode) return;
+    const pData = players.find(pl => pl.name.toLowerCase() === name.toLowerCase());
+    if(!pData) return alert("Player not found!");
+    let retiredList = (pData.retiredModes || []).filter(m => m !== mode);
+    await updateDoc(doc(db, "players", name.toLowerCase()), { retiredModes: retiredList });
+    alert("Restored in " + mode); loadData();
+}
+
+window.setMode = (m, e) => { currentMode = m; document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active')); if(e) e.classList.add('active'); render(); }
+window.closeModal = () => { const m = document.getElementById("playerModal"); m.classList.remove("show"); setTimeout(() => m.style.display = "none", 300); }
+window.quickSearchOpen = () => {
+    const val = document.getElementById("search").value.toLowerCase();
+    const p = players.find(pl => pl.name.toLowerCase() === val);
+    if(p) showStatus(p.name);
 }
 
 loadData();
